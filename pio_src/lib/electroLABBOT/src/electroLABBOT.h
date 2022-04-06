@@ -70,7 +70,33 @@ public:
   uint16_t right_IR_sensor_read_value();
 };
 
-class ElectroLABBOT : public Motors, public UltrasonicSensor, public LED {
+class Buttons {
+private:
+public:
+  Buttons();
+  bool read_button_1();
+  bool read_button_2();
+};
+
+class Buzzer {
+public:
+  Buzzer();
+
+  //   void buzz(uint16_t frequency, uint16_t duration, uint16_t delay);
+  void buzz(uint16_t frequency, uint16_t duration);
+  void buzz(uint16_t frequency);
+  void buzz();
+
+  void active_buzzer(bool buzzer_state);
+  void no_buzz();
+};
+
+class ElectroLABBOT : public Motors,
+                      public UltrasonicSensor,
+                      public IR_Sensor,
+                      public Buttons,
+                      public LED,
+                      public Buzzer {
 private:
 public:
   ElectroLABBOT();

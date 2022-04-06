@@ -51,6 +51,6 @@ const uint8_t ALL_MOTORS_DETACH = 6;
 const uint8_t BUZZER_PIN = 15;
 
 /* Button related constants */
-const uint8_t BUTTON_1 = 33;
-const uint8_t BUTTON_2 = 25;
+const uint8_t BUTTON_1_PIN = 33;
+const uint8_t BUTTON_2_PIN = 25;
 #endif // PIO_SRC_LIB_ELECTROLABBOT_SRC_ELECTROLABBOT_CONFIG_H_

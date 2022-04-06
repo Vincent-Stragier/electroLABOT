@@ -1,0 +1,144 @@
+﻿    
+#FUNCTIONS COLOR 			#D35400 - ORANGE			KEYWORD1
+#FUNCTIONS COLOR			#D35400 - ORANGE			KEYWORD2
+#STRUCTURE COLOR	 		#728E00 - GREEN				KEYWORD3
+#VARIABLES COLOR 			#00979C - BLUE				LITERAL1
+
+#######################################
+#	Classes, Mot-Clés (KEYWORD1)
+#######################################
+
+electroLABBOT   KEYWORD1
+billy	LITERAL1
+willy   LITERAL1
+lilly   LITERAL1
+
+# Classes
+LED	KEYWORD1
+UltrasonicSensor    KEYWORD1
+Motors  KEYWORD1
+IR_Sensor   KEYWORD1
+Buttons KEYWORD1
+Buzzer  KEYWORD1
+
+
+#######################################
+#	Méthodes et fonctions (KEYWORD2)
+#######################################
+## Functions
+# debug	KEYWORD2
+attach_detach_PWM   KEYWORD2
+average_IR  KEYWORD2
+
+## LED class
+rgb_init    KEYWORD2
+led KEYWORD2
+rgb_blink   KEYWORD2
+rgb_set_color   KEYWORD2
+
+## UltrasonicSensor class
+move_ultrasonic_sensor  KEYWORD2
+measure_distance_in_cm  KEYWORD2
+find_clear_path KEYWORD2
+check_clearance KEYWORD2
+
+## Motors class
+left_motor_speed    KEYWORD2
+right_motor_speed   KEYWORD2
+motors_speed    KEYWORD2
+
+## IR_Sensor class
+left_IR_sensor_read_value   KEYWORD2
+right_IR_sensor_read_value  KEYWORD2
+
+## Buttons class
+read_button_1   KEYWORD2
+read_button_2   KEYWORD2
+
+## Buzzer class
+buzz    KEYWORD2
+active_buzzer   KEYWORD2
+no_buzz KEYWORD2
+
+#######################################
+#	Fonctions setup et loop comme l'initialisation de Serial (KEYWORD3)
+#######################################
+
+
+######################################
+# Constants (LITERAL1)
+#######################################
+# DEBUG	LITERAL1
+
+SERVOMOTOR_PIN	LITERAL1
+ULTRASONIC_SENSOR_PIN	LITERAL1
+
+LEFT_FREE	LITERAL1
+RIGHT_FREE	LITERAL1
+NO_FREE	LITERAL1
+KEEP_GOING	LITERAL1
+STOP	LITERAL1
+PROBLEM	LITERAL1
+
+## LED related constants
+COLOR_ORDER	LITERAL1
+LED_BUILTIN	LITERAL1
+NUM_LEDS	LITERAL1
+DATA_PIN	LITERAL1
+LED_D11	LITERAL1
+LED_D12	LITERAL1
+LED_D13	LITERAL1
+LED_D14	LITERAL1
+LED_ALL	LITERAL1
+
+## Self driving related constants
+IR_SENSOR_1	LITERAL1
+IR_SENSOR_2	LITERAL1
+LEFT_IR_SENSOR_PIN	LITERAL1
+RIGHT_IR_SENSOR_PIN	LITERAL1
+IR_THRESHOLD	LITERAL1
+
+## Motors related constants
+LEFT_MOTOR_EN	LITERAL1
+LEFT_MOTOR_FORWARD	LITERAL1
+LEFT_MOTOR_BACKWARD	LITERAL1
+
+RIGHT_MOTOR_EN	LITERAL1
+RIGHT_MOTOR_FORWARD	LITERAL1
+RIGHT_MOTOR_BACKWARD	LITERAL1
+
+ALL_MOTORS_FORWARD	LITERAL1
+ALL_MOTORS_BACKWARD	LITERAL1
+ALL_MOTORS_STOP	LITERAL1
+ALL_MOTORS_DETACH	LITERAL1
+
+## Buzzer related constants
+BUZZER_PIN	LITERAL1
+
+## Button related constants
+BUTTON_1_PIN	LITERAL1
+BUTTON_2_PIN	LITERAL1
+
+## FreeRTOS
+# Functions
+xTaskCreatePinnedToCore	KEYWORD2
+configASSERT	KEYWORD2
+vTaskSuspend	KEYWORD2
+vTaskResume	KEYWORD2
+vTaskDelete	KEYWORD2
+xQueuePeek	KEYWORD2
+xQueueOverwrite	KEYWORD2
+uxQueueMessagesWaiting	KEYWORD2
+xQueueReceive	KEYWORD2
+xQueueCreate	KEYWORD2
+xQueueSend	KEYWORD2
+
+# Classes
+TaskHandle_t	KEYWORD1
+QueueHandle_t	KEYWORD1
+
+# Constants
+portMAX_DELAY	LITERAL1
+
+## ESP32 DAC
+dacWrite	KEYWORD2

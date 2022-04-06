@@ -22,7 +22,7 @@ const uint8_t LED_D11 = 0;
 const uint8_t LED_D12 = 1;
 const uint8_t LED_D13 = 2;
 const uint8_t LED_D14 = 3;
-const uint8_t LED_all = 4;
+const uint8_t LED_ALL = 4;
 
 /* Self driving related constants */
 const uint8_t IR_SENSOR_1 = 26;

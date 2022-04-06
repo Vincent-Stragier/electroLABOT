@@ -21,7 +21,7 @@ public:
   void rgb_blink(uint32_t blink_delay);
   void rgb_set_color(uint8_t led, uint8_t R, uint8_t G, uint8_t B);
   /*
-      led = LED_D11, LED_D12, LED_D13, LED_D14 ou LED_all (pour affecter la
+      led = LED_D11, LED_D12, LED_D13, LED_D14 ou LED_ALL (pour affecter la
      couleur aux 4 leds) R, G, B correspodnent au pourcentage de rouge, vert
      ou bleu dans la led.
   */

@@ -40,7 +40,7 @@ void LED::rgb_set_color(uint8_t led, uint8_t R, uint8_t G, uint8_t B) {
   temp = B;
   rgb = rgb | temp;
 
-  if (led == LED_all) {
+  if (led == LED_ALL) {
     for (int i = 0; i < 4; i++) {
       LEDs[i] = rgb;
     }

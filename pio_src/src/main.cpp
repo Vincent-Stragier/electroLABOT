@@ -132,13 +132,9 @@ void setup() {
   init_websocket();
   server.begin();
   Serial.println("Server started");
-
-  pinMode(BUTTON_1_PIN, INPUT);
-  pinMode(BUTTON_2_PIN, INPUT);
 }
 
 void loop() {
   ws.cleanupClients();
-  // server.loop();
   send_sensors_values();
 }

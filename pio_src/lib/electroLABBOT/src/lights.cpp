@@ -14,6 +14,8 @@ LED::LED(int16_t led_pin) { pinMode(led_pin, OUTPUT); }
 
 void LED::led(int16_t led_pin, bool state) { digitalWrite(led_pin, state); }
 
+void LED::led(bool state) { digitalWrite(LED_BUILTIN, state); }
+
 void LED::rgb_blink(uint32_t blink_delay) {
   current_millis = millis();
 

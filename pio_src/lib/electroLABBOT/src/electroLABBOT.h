@@ -17,6 +17,7 @@ public:
   explicit LED(int16_t pin_led);
 
   void led(int16_t pin_led, bool state);
+  void led(bool state);
 
   void rgb_blink(uint32_t blink_delay);
   void rgb_set_color(uint8_t led, uint8_t R, uint8_t G, uint8_t B);

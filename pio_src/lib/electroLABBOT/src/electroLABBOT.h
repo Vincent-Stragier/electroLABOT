@@ -38,7 +38,6 @@ public:
   uint8_t check_clearance(uint8_t);
 };
 
-
 void motors_task(void *parameter);
 class Motors {
 private:
@@ -52,8 +51,11 @@ private:
 public:
   Motors();
   void begin();
-  void left_motor_speed(int16_t, uint16_t acceleration = 400);
-  void right_motor_speed(int16_t, uint16_t acceleration = 400);
+  void left_motor_speed(int16_t,
+                        uint16_t acceleration = MOTORS_ACCELERATION_PER_SECOND);
+  void
+  right_motor_speed(int16_t,
+                    uint16_t acceleration = MOTORS_ACCELERATION_PER_SECOND);
   void motors_speed(int16_t, int16_t);
 };
 

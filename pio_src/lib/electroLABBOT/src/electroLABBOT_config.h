@@ -47,6 +47,11 @@ const uint8_t ALL_MOTORS_BACKWARD = 2;
 const uint8_t ALL_MOTORS_STOP = 3;
 const uint8_t ALL_MOTORS_DETACH = 6;
 
+const int16_t PWM_MOTOR1_CHANNEL = 2;
+const int16_t PWM_MOTOR2_CHANNEL = 3;
+const int16_t PWM_MOTORS_FREQ = 3000;
+const int16_t PWM_MOTORS_RES = 8;
+
 /* Buzzer related constants */
 const uint8_t BUZZER_PIN = 15;
 

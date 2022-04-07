@@ -7,6 +7,8 @@ void setup() {
   Serial.println(
       "Tout ce dont vous avez besoin de connaitre sur electroLABBOT");
 
+  billy.begin();
+
   /* Pour faire bouger le robot, il existes trois méthodes : */
   // Pour faire tourner le moteur gauche en marche arrière à la vitesse maximale
   // et pour faire tourner le moteur droit en marche avant à la vitesse maximale

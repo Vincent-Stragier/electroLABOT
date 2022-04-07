@@ -38,24 +38,22 @@ public:
   uint8_t check_clearance(uint8_t);
 };
 
+
+void motors_task(void *parameter);
 class Motors {
 private:
-  const int16_t PWM_MOTOR1_CHANNEL = 2;
-  const int16_t PWM_MOTOR2_CHANNEL = 3;
-  const int16_t PWM_MOTORS_FREQ = 3000;
-  const int16_t PWM_MOTORS_RES = 8;
-
-  const int16_t PWM_MOTOR_MIN_VALUE_DUTYCYCLE = 60;
-  int16_t previous_left_motor_speed = 0;
-  int16_t previous_right_motor_speed = 0;
-  const int16_t max_val_motors_speed = 200;
-  const int16_t start_val_right_motor_speed = 0;
-  const int16_t start_val_left_motor_speed = 0;
+  // const int16_t PWM_MOTOR_MIN_VALUE_DUTYCYCLE = 60;
+  // int16_t previous_left_motor_speed = 0;
+  // int16_t previous_right_motor_speed = 0;
+  // const int16_t max_val_motors_speed = 200;
+  // const int16_t start_val_right_motor_speed = 0;
+  // const int16_t start_val_left_motor_speed = 0;
 
 public:
   Motors();
-  void left_motor_speed(int16_t);
-  void right_motor_speed(int16_t);
+  void begin();
+  void left_motor_speed(int16_t, uint16_t acceleration = 400);
+  void right_motor_speed(int16_t, uint16_t acceleration = 400);
   void motors_speed(int16_t, int16_t);
 };
 

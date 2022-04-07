@@ -20,8 +20,8 @@ void send_sensors_values(uint32_t refresh_delay = 100) {
 
   if (millis() - last_send_time > refresh_delay) {
     root["distance"] = billy.measure_distance_in_cm();
-    root["BUTTON_1_PIN"] = billy.read_button_1();
-    root["BUTTON_2_PIN"] = billy.read_button_2();
+    root["button_1"] = billy.read_button_1();
+    root["button_2"] = billy.read_button_2();
 
     String json;
     serializeJson(root, json);
@@ -110,6 +110,7 @@ void setup() {
   Serial.begin(115200);
   Serial.println();
   Serial.println("Configuring access point...");
+  billy.begin();
 
   // You can remove the password parameter if you want the AP to be open.
   // So I don't have to type in my password every time I connect to the AP.

@@ -1,141 +1,82 @@
-/* Copyright 2022 electroLABBOT. All rights reserved. */
-#include <Arduino.h>
-#include <ArduinoJson.h>
-#include <AsyncTCP.h>
-#include <ESPAsyncWebServer.h>
-#include <WiFi.h>
-#include <WiFiAP.h>
+#include <electroLABBOT.h>
 
-#include "electroLABBOT.h"
-
-AsyncWebServer server(42);
-AsyncWebSocket ws("/ws");
 ElectroLABBOT billy;
 
-// void notifyClients() { ws.textAll(String(ledState)); }
-
-void send_sensors_values(uint32_t refresh_delay = 100) {
-  static DynamicJsonDocument root(200);
-  static uint32_t last_send_time = millis();
-
-  if (millis() - last_send_time > refresh_delay) {
-    root["distance"] = billy.measure_distance_in_cm();
-    root["button_1"] = billy.read_button_1();
-    root["button_2"] = billy.read_button_2();
-
-    String json;
-    serializeJson(root, json);
-    ws.textAll(json);
-    last_send_time = millis();
-    Serial.println(json);
-  }
-}
-
-void handle_websocket_message(void *arg, uint8_t *data, size_t len) {
-  AwsFrameInfo *info = reinterpret_cast<AwsFrameInfo *>(arg);
-  if (info->final && info->index == 0 && info->len == len &&
-      info->opcode == WS_TEXT) {
-    data[len] = 0;
-    Serial.print("Message Received: ");
-    Serial.println(reinterpret_cast<char *>(data));
-
-    DynamicJsonDocument json(1024);
-    DeserializationError error =
-        deserializeJson(json, reinterpret_cast<char *>(data));
-
-    if (error) {
-      Serial.print(F("deserializeJson() failed: "));
-      Serial.println(error.c_str());
-      return;
-    }
-
-    for (uint8_t index(0); index < NUM_LEDS; index++) {
-      if (json.containsKey("rgb_" + String(index))) {
-        Serial.println("Setting LED " + String(index));
-        uint8_t R = json["rgb_" + String(index)][0];
-        uint8_t G = json["rgb_" + String(index)][1];
-        uint8_t B = json["rgb_" + String(index)][2];
-        billy.rgb_set_color(index, R, G, B);
-      }
-    }
-
-    if (json.containsKey("led_builtin")) {
-      // digitalWrite(LED_BUILTIN, json["led_builtin"]);
-      billy.led(LED_BUILTIN, json["led_builtin"]);
-    }
-
-    if (json.containsKey("motor_a")) {
-      billy.left_motor_speed(json["motor_a"]);
-    }
-
-    if (json.containsKey("motor_b")) {
-      billy.right_motor_speed(json["motor_b"]);
-    }
-
-    if (json.containsKey("distance_sensor_angle")) {
-      billy.move_ultrasonic_sensor(json["distance_sensor_angle"]);
-    }
-
-    if (json.containsKey("active_buzzer")) {
-      billy.active_buzzer(json["active_buzzer"]);
-    }
-  }
-}
-
-void onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client,
-             AwsEventType type, void *arg, uint8_t *data, size_t len) {
-  switch (type) {
-  case WS_EVT_CONNECT:
-    Serial.printf("WebSocket client #%u connected from %s\n", client->id(),
-                  client->remoteIP().toString().c_str());
-    break;
-  case WS_EVT_DISCONNECT:
-    Serial.printf("WebSocket client #%u disconnected\n", client->id());
-    break;
-  case WS_EVT_DATA:
-    handle_websocket_message(arg, data, len);
-    break;
-  case WS_EVT_PONG:
-  case WS_EVT_ERROR:
-    break;
-  }
-}
-
-void init_websocket() {
-  ws.onEvent(onEvent);
-  server.addHandler(&ws);
-}
-
 void setup() {
-  Serial.begin(115200);
-  Serial.println();
-  Serial.println("Configuring access point...");
+  Serial.begin(9600);
+  Serial.println(
+      "Tout ce dont vous avez besoin de connaitre sur electroLABBOT");
+
   billy.begin();
 
-  // You can remove the password parameter if you want the AP to be open.
-  // So I don't have to type in my password every time I connect to the AP.
-  String ssid = "electroLABBOT";
-  String wifi_mac_address = WiFi.macAddress();
-  wifi_mac_address.replace(":", "");
-  wifi_mac_address = "_" + wifi_mac_address.substring(6, 12);
-  ssid += wifi_mac_address;
-  Serial.println(ssid);
-  WiFi.softAP(ssid.c_str());
+  /* Pour faire bouger le robot, il existes trois méthodes : */
+  // Pour faire tourner le moteur gauche en marche arrière à la vitesse maximale
+  // et pour faire tourner le moteur droit en marche avant à la vitesse maximale
+  Serial.println("Rotation à droite...");
+  billy.motors_speed(-4096, 4096);
+  delay(1000);
 
-  IPAddress access_point_ip(192, 168, 100, 1);
-  IPAddress netmask_ip(255, 255, 255, 0);
-  IPAddress gateway_ip(192, 168, 100, 1);
-  WiFi.softAPConfig(access_point_ip, gateway_ip, netmask_ip);
+  // Pour faire tourner le moteur gauche en marche avant à la vitesse maximale
+  Serial.println("Tourner à droite...");
+  billy.left_motor_speed(4096);
+  delay(1000);
 
-  Serial.print("AP IP address: ");
-  Serial.println(WiFi.softAPIP());
+  // Pour faire tourner le moteur droit en marche arrière à la vitesse maximale
+  Serial.println("Tourner vers l'arrière droite...");
+  billy.right_motor_speed(-4096);
+  delay(1000);
 
-  init_websocket();
-  server.begin();
-  Serial.println("Server started");
+  // Pour stopper le robot
+  Serial.println("Arrêter le robot...");
+  billy.motors_speed(0, 0);
+
+  /* Lecture du capteur de distance */
+  for (uint8_t angle(0); angle < 180; angle += 10) {
+    // La méthode move_ultrasonic_sensor() permet de faire tourner le capteur.
+    billy.move_ultrasonic_sensor(angle);
+    Serial.print("Lecture du capteur de distance (angle = ");
+    Serial.print(angle);
+    Serial.print("degrees) : ");
+    // La méthode measure_distance_in_cm() permet de lire la distance mesurée.
+    Serial.print(billy.measure_distance_in_cm());
+    Serial.println(" cm");
+  }
+
+  /* Lecture des boutons */
+  Serial.print("Lecture du bouton 1 : ");
+  Serial.println(billy.read_button_1());
+  Serial.print("Lecture du bouton 2 : ");
+  Serial.println(billy.read_button_2());
+
+  /* Lecture des capteurs IR */
+  Serial.print("Lecture du capteur IR droit : ");
+  Serial.println(billy.right_IR_sensor_read_value());
+  Serial.print("Lecture du capteur IR gauche : ");
+  Serial.println(billy.left_IR_sensor_read_value());
+
+  /* Contrôle de LED_BUILTIN */
+  // Pour allumer la LED_BUILTIN,
+  // il faut appeler la méthode led() avec la
+  // valeur true.
+  billy.led(true);
+  delay(1000);
+
+  // Pour éteindre la LED_BUILTIN,
+  // il faut appeler la méthode led() avec la
+  // valeur false.
+  billy.led(false);
+
+  /* Contrôle de la buzzer */
+  // Pour allumer la buzzer,
+  // il faut appeler la méthode active_buzzer() avec la
+  // valeur true.
+  billy.active_buzzer(true);
+  delay(1000);
+
+  // Pour éteindre la buzzer,
+  // il faut appeler la méthode active_buzzer() avec la
+  // valeur false.
+  billy.active_buzzer(false);
 }
 
-void loop() {
-  ws.cleanupClients();
-  send_sensors_values();
-}
+void loop() {}

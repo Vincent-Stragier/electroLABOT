@@ -1,4 +1,4 @@
-/* Copyright 2022 electroLABBOT. All rights reserved. */
+/* Copyright 2022 electroLABOT. All rights reserved. */
 #include <Arduino.h>
 #include <ArduinoJson.h>
 #include <AsyncTCP.h>
@@ -6,11 +6,11 @@
 #include <WiFi.h>
 #include <WiFiAP.h>
 
-#include "electroLABBOT.h"
+#include "electroLABOT.h"
 
 AsyncWebServer server(42);
 AsyncWebSocket ws("/ws");
-ElectroLABBOT billy;
+ElectroLABOT billy;
 
 // void notifyClients() { ws.textAll(String(ledState)); }
 
@@ -114,7 +114,7 @@ void setup() {
 
   // You can remove the password parameter if you want the AP to be open.
   // So I don't have to type in my password every time I connect to the AP.
-  String ssid = "electroLABBOT";
+  String ssid = "electroLABOT";
   String wifi_mac_address = WiFi.macAddress();
   wifi_mac_address.replace(":", "");
   wifi_mac_address = "_" + wifi_mac_address.substring(6, 12);

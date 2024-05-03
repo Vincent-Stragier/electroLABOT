@@ -1,5 +1,5 @@
-/* Copyright 2022 electroLABBOT. All rights reserved. */
-#include "electroLABBOT.h"
+/* Copyright 2022 electroLABOT. All rights reserved. */
+#include "electroLABOT.h"
 
 Buzzer::Buzzer() { pinMode(BUZZER_PIN, OUTPUT); }
 
@@ -9,14 +9,20 @@ Buzzer::Buzzer() { pinMode(BUZZER_PIN, OUTPUT); }
 // }
 
 void Buzzer::buzz(uint16_t frequency, uint16_t duration) {
-  tone(BUZZER_PIN, frequency, duration);
+  //tone(BUZZER_PIN, frequency, duration);
 }
 
-void Buzzer::buzz() { tone(BUZZER_PIN, 1000); }
+void Buzzer::buzz() { 
+  //tone(BUZZER_PIN, 1000); 
+  }
 
-void Buzzer::buzz(uint16_t frequency) { tone(BUZZER_PIN, frequency); }
+void Buzzer::buzz(uint16_t frequency) { 
+  //tone(BUZZER_PIN, frequency); 
+  }
 
-void Buzzer::no_buzz() { noTone(BUZZER_PIN); }
+void Buzzer::no_buzz() { 
+  //noTone(BUZZER_PIN); 
+  }
 
 void Buzzer::active_buzzer(bool buzzer_state) {
   digitalWrite(BUZZER_PIN, buzzer_state);

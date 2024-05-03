@@ -8,7 +8,7 @@
 #	Classes, Mot-Clés (KEYWORD1)
 #######################################
 
-electroLABBOT   KEYWORD1
+electroLABOT   KEYWORD1
 billy	LITERAL1
 willy   LITERAL1
 lilly   LITERAL1

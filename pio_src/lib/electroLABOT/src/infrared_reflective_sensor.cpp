@@ -1,5 +1,5 @@
-/* Copyright 2022 electroLABBOT. All rights reserved. */
-#include "electroLABBOT.h"
+/* Copyright 2022 electroLABOT. All rights reserved. */
+#include "electroLABOT.h"
 
 IR_Sensor::IR_Sensor() {
   pinMode(LEFT_IR_SENSOR_PIN, INPUT);

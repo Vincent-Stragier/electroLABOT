@@ -1,7 +1,7 @@
 {
-  "name": "electroLABBOT",
-  "keywords": "electroLABBOT",
-  "description": "Bibliothèque pour le robot electroLABBOT",
+  "name": "electroLABOT",
+  "keywords": "electroLABOT",
+  "description": "Bibliothèque pour le robot electroLABOT",
   "repository":
   {
     "type": "email",

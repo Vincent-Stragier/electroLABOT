@@ -1,11 +1,11 @@
-/* Copyright 2022 electroLABBOT. All rights reserved. */
-#ifndef PIO_SRC_LIB_ELECTROLABBOT_SRC_ELECTROLABBOT_H_
-#define PIO_SRC_LIB_ELECTROLABBOT_SRC_ELECTROLABBOT_H_
+/* Copyright 2022 electroLABOT. All rights reserved. */
+#ifndef PIO_SRC_LIB_ELECTROLABOT_SRC_ELECTROLABOT_H_
+#define PIO_SRC_LIB_ELECTROLABOT_SRC_ELECTROLABOT_H_
 #include <Arduino.h>
 #include <ESP32Servo.h>
 #include <FastLED.h>
 
-#include "electroLABBOT_config.h"
+#include "electroLABOT_config.h"
 
 class LED {
 private:
@@ -92,7 +92,7 @@ public:
   void no_buzz();
 };
 
-class ElectroLABBOT : public Motors,
+class ElectroLABOT : public Motors,
                       public UltrasonicSensor,
                       public IR_Sensor,
                       public Buttons,
@@ -100,7 +100,7 @@ class ElectroLABBOT : public Motors,
                       public Buzzer {
 private:
 public:
-  ElectroLABBOT();
+  ElectroLABOT();
 };
 
-#endif // PIO_SRC_LIB_ELECTROLABBOT_SRC_ELECTROLABBOT_H_
+#endif // PIO_SRC_LIB_ELECTROLABOT_SRC_ELECTROLABOT_H_

@@ -1,5 +1,5 @@
-/* Copyright 2022 electroLABBOT. All rights reserved. */
-#include "electroLABBOT.h"
+/* Copyright 2022 electroLABOT. All rights reserved. */
+#include "electroLABOT.h"
 
 Buttons::Buttons() {
   pinMode(BUTTON_1_PIN, INPUT);

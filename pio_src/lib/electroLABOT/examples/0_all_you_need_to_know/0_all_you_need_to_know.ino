@@ -1,11 +1,11 @@
-#include <electroLABBOT.h>
+#include <electroLABOT.h>
 
-ElectroLABBOT billy;
+ElectroLABOT billy;
 
 void setup() {
   Serial.begin(9600);
   Serial.println(
-      "Tout ce dont vous avez besoin de connaitre sur electroLABBOT");
+      "Tout ce dont vous avez besoin de connaitre sur electroLABOT");
 
   billy.begin();
 
